@@ -33,6 +33,3 @@ def automovel_detalhe(request, pk):
                   'veiculos/automovel_detalhe.html',
                   {'automovel': automovel})
 
-
-def automovel_teste(request):
-    return HttpResponse('<h1>Sistema de Locadora - Teste</h1>')
