@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes - {{ automovel.marca }} {{ automovel.modelo }}</title>
+</head>
+<body>
+    <h1>Detalhes do Veículo</h1>
+
+    <table border="1">
+        <tr>
+            <td><strong>Placa:</strong></td>
+            <td>{{ automovel.placa }}</td>
+        </tr>
+        <tr>
+            <td><strong>Marca:</strong></td>
+            <td>{{ automovel.marca }}</td>
+        </tr>
+        <tr>
+            <td><strong>Modelo:</strong></td>
+            <td>{{ automovel.modelo }}</td>
+        </tr>
+        <tr>
+            <td><strong>Ano:</strong></td>
+            <td>{{ automovel.ano }}</td>
+        </tr>
+        <tr>
+            <td><strong>Cor:</strong></td>
+            <td>{% if automovel.cor %}{{ automovel.cor }}{% else %}Não informada{% endif %}</td>
+        </tr>
+        <tr>
+            <td><strong>Valor da Diária:</strong></td>
+            <td>R$ {{ automovel.valor_diaria }}</td>
+        </tr>
+        <tr>
+            <td><strong>Disponível:</strong></td>
+            <td>{% if automovel.disponivel %}Sim{% else %}Não{% endif %}</td>
+        </tr>
+        <tr>
+            <td><strong>Data de Cadastro:</strong></td>
+            <td>{{ automovel.data_cadastro|date:"d/m/Y H:i" }}</td>
+        </tr>
+    </table>
+
+    <p><a href="{% url 'veiculos:automovel_lista' %}">Voltar para a Lista</a></p>
+</body>
+</html>

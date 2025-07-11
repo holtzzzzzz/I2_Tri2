@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo_pagina }}</title>
+</head>
+<body>
+    <h1>{{ titulo_pagina }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id_placa">Placa:</label><br>
+        <input type="text" id="id_placa" name="placa" required maxlength="10"
+               value="{{ form.placa.value|default:'' }}"><br><br>
+
+        <label for="id_marca">Marca:</label><br>
+        <input type="text" id="id_marca" name="marca" required maxlength="100"
+               value="{{ form.marca.value|default:'' }}"><br><br>
+
+        <label for="id_modelo">Modelo:</label><br>
+        <input type="text" id="id_modelo" name="modelo" required maxlength="100"
+               value="{{ form.modelo.value|default:'' }}"><br><br>
+
+        <label for="id_ano">Ano:</label><br>
+        <input type="number" id="id_ano" name="ano" required min="1900" max="2025"
+               value="{{ form.ano.value|default:'' }}"><br><br>
+
+        <label for="id_cor">Cor (opcional):</label><br>
+        <input type="text" id="id_cor" name="cor" maxlength="50"
+               value="{{ form.cor.value|default:'' }}"><br><br>
+
+        <label for="id_valor_diaria">Valor da Diária (R$):</label><br>
+        <input type="number" id="id_valor_diaria" name="valor_diaria" required step="0.01"
+               value="{{ form.valor_diaria.value|default:'' }}"><br><br>
+
+        <input type="checkbox" id="id_disponivel" name="disponivel"
+               {% if form.disponivel.value %}checked{% endif %}>
+        <label for="id_disponivel">Disponível para locação</label><br><br>
+
+        <button type="submit">Adicionar Veículo</button>
+        <a href="{% url 'veiculos:automovel_lista' %}">Cancelar</a>
+
+        {% if form.errors %}
+            <div style="color: red; margin-top: 15px;">
+                <h3>Erros no formulário:</h3>
+                <ul>
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <li>{{ field.label }}: {{ field.errors }}</li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if form.non_field_errors %}
+                        <li>{{ form.non_field_errors }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
+    </form>
+</body>
+</html>
